@@ -50,6 +50,4 @@ export type TProductProps = {
     product_image: string;
     handleDeleteProduct: (id: string) => void;
     handleUpdateProduct: (e: React.FormEvent<HTMLFormElement>, id: string) => void;
-    updateModalIsOpen: boolean;
-    setUpdateModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }

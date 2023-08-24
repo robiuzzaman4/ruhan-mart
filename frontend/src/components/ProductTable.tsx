@@ -14,9 +14,7 @@ const ProductTable = () => {
     const [loading, setLoading] = useState(true);
     // state for add modal
     const [addModalIsOpen, setAddModalIsOpen] = useState(false);
-    // state for update modal
-    const [updateModalIsOpen, setUpdateModalIsOpen] = useState(false);
-
+    
     // table heading
     const tableHead = ["Product Image", "Product Name", "Product Weight", "Product Price", "Action"];
 
@@ -134,7 +132,6 @@ const ProductTable = () => {
                             console.log("data: 131", res.data);
                             if (res.data) {
                                 form.reset();
-                                setUpdateModalIsOpen(false);
                                 return toast.success("Successfully Updated this Product!");
                             }
                         })
@@ -195,9 +192,7 @@ const ProductTable = () => {
                                                     key={product._id}
                                                     {...product}
                                                     handleDeleteProduct={handleDeleteProduct}
-                                                    handleUpdateProduct={handleUpdateProduct}
-                                                    updateModalIsOpen={updateModalIsOpen}
-                                                    setUpdateModalIsOpen={setUpdateModalIsOpen} />
+                                                    handleUpdateProduct={handleUpdateProduct}/>
                                             ))
                                         }
                                     </tbody>

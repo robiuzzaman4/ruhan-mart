@@ -5,7 +5,11 @@ import Image from "next/image";
 import { useState } from "react";
 import UpdateProductForm from "./UpdateProductForm";
 
-const TableRow = ({ _id, product_name, product_price, product_weight, product_image, handleDeleteProduct, handleUpdateProduct, updateModalIsOpen, setUpdateModalIsOpen }: TProductProps) => {
+const TableRow = ({ _id, product_name, product_price, product_weight, product_image, handleDeleteProduct, handleUpdateProduct }: TProductProps) => {
+    
+    // state for update modal
+    const [updateModalIsOpen, setUpdateModalIsOpen] = useState(false);
+    
 
     // pass this selected value to update form
     const selectedProduct = {
