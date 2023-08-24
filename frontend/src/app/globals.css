@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.swiper-button-next {
+    background-image: url('/icons/arrowRight.svg');
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center;
+}
+.swiper-button-prev {
+    background-image: url('/icons/arrowLeft.svg');
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center;
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    display: none;
+}
