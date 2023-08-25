@@ -29,7 +29,7 @@ const Slider = () => {
                                     alt="Slider Image"
                                     height={100}
                                     width={720}
-                                    className="w-full h-full object-cover min-h-[300px] max-h-[400px]" />
+                                    className="w-full h-full object-cover min-h-[400px] max-h-[500px]" />
 
                                 {/* overlay and content */}
                                 <div className="absolute inset-0 bg-neutral-900/60 grid md:grid-cols-2 place-items-center gap-4 p-10 sm:p-16 md:p-20">

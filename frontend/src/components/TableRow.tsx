@@ -6,10 +6,10 @@ import { useState } from "react";
 import UpdateProductForm from "./UpdateProductForm";
 
 const TableRow = ({ _id, product_name, product_price, product_weight, product_image, handleDeleteProduct, handleUpdateProduct }: TProductProps) => {
-    
+
     // state for update modal
     const [updateModalIsOpen, setUpdateModalIsOpen] = useState(false);
-    
+
 
     // pass this selected value to update form
     const selectedProduct = {
@@ -26,14 +26,12 @@ const TableRow = ({ _id, product_name, product_price, product_weight, product_im
         <>
             <tr className="even:bg-neutral-100">
                 <td className="p-4">
-                    <span className="w-10 h-10 rounded-lg bg-gradient-to-b from-indigo-50 to-indigo-100 overflow-hidden">
-                        <Image
-                            width={40}
-                            height={40}
-                            src={product_image}
-                            alt="Product Image"
-                            className="p-1 rounded-lg" />
-                    </span>
+                    <Image
+                        width={40}
+                        height={40}
+                        src={product_image}
+                        alt="Product Image"
+                        className="p-1 rounded-lg" />
                 </td>
                 <td className="p-4">
                     <h5 className="font-normal">

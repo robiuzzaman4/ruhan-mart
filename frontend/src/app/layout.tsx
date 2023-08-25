@@ -3,13 +3,12 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import 'remixicon/fonts/remixicon.css'
 import { Toaster } from 'react-hot-toast';
-import ProdcutProvider from '@/providers/ProdcutProvider';
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Ruhan Mart',
-  description: 'Ruhan Mart - E-Commerce',
+  description: 'Ruhan Mart - E-Commerce Website',
 }
 
 export default function RootLayout({
@@ -19,10 +18,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} min-h-screen bg-neutral-50 text-neutral-900`}>
-        <ProdcutProvider>
-          {children}
-        </ProdcutProvider>
+      <body className={`${inter.className} min-h-screen bg-neutral-50 text-neutral-900 scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-indigo-500`}>
+        {children}
         <Toaster />
       </body>
     </html>

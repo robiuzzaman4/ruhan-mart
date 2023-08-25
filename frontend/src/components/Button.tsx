@@ -5,7 +5,7 @@ const Button = ({children, className, type, onClick}: TButtonProps) => {
         <button
         onClick={onClick}
         type={type ? type : "button"} 
-        className={`px-4 py-2 text-sm font-medium ${className && className}`}>
+        className={`px-4 py-2 text-sm font-medium border border-indigo-500 ${className && className}`}>
             {children}
         </button>
     );

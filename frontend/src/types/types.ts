@@ -51,3 +51,26 @@ export type TProductProps = {
     handleDeleteProduct: (id: string) => void;
     handleUpdateProduct: (e: React.FormEvent<HTMLFormElement>, id: string) => void;
 }
+
+// type for inly product
+export type TProduct = {
+    _id: string;
+    product_name: string;
+    product_price: number;
+    product_weight: string;
+    product_image: string;
+    isChangeWidth?: boolean;
+}
+
+// types for stored product props
+export type TStoredProductProps = {
+    _id: string;
+    quantity: number;
+    product_name: string;
+    product_price: number;
+    product_weight: string;
+    product_image: string;
+    handleDeleteProduct: (id: string) => void;
+}
+
+// types for cartProductCard components props

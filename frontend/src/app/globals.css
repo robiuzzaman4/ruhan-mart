@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+    display: none;
+}
 
 .swiper-button-next {
     background-image: url('/icons/arrowRight.svg');
@@ -9,13 +12,21 @@
     background-size: 100% auto;
     background-position: center;
 }
+
 .swiper-button-prev {
     background-image: url('/icons/arrowLeft.svg');
     background-repeat: no-repeat;
     background-size: 100% auto;
     background-position: center;
 }
+
 .swiper-button-next::after,
 .swiper-button-prev::after {
     display: none;
+}
+
+@layer components {
+    .carousel-container {
+        @apply w-full max-w-screen-xl mx-auto px-4 sm:px-8 md:px-12 overflow-hidden
+    }
 }

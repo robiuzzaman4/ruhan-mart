@@ -8,11 +8,11 @@ const SignIn = () => {
     return (
         <section className="min-h-screen flex flex-col items-center justify-center">
             <Container>
-                {/* back to home btn */}
-                <Link href="/" className="absolute top-0 left-4 sm:left-8 md:left-12">
-                    <Button className="bg-neutral-900 text-neutral-50 rounded-lg">
-                        <i className="ri-arrow-left-s-line"></i>
-                    </Button>
+               {/* back to home btn */}
+               <Link href="/" className="absolute top-0 left-4 sm:left-8 md:left-12">
+                    <button className="bg-indigo-500 text-neutral-50 rounded-lg px-4 py-1 border border-indigo-500">
+                        <i className="ri-arrow-left-s-line text-xl"></i>
+                    </button>
                 </Link>
 
                 <h2 className="py-8 text-center text-2xl font-bold">Sign In</h2>
