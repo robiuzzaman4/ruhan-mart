@@ -13,13 +13,14 @@ import { toast } from "react-hot-toast";
 const Cart = () => {
     const { storedProducts } = useProductsAndStoredProducts();
     const router = useRouter();
-    
-    const handleDeleteProduct = (id: string) => {
-        removeFromDb(id);
-        toast.success("Remove from Cart!", {
-            icon: <i className="ri-indeterminate-circle-line text-xl text-red-500"></i>,
-        });
 
+    const handleDeleteProduct = (id: string) => {
+        if (typeof window !== 'undefined') {
+            removeFromDb(id);
+            toast.success("Remove from Cart!", {
+                icon: <i className="ri-indeterminate-circle-line text-xl text-red-500"></i>,
+            });
+        }
         router.refresh();
     }
 

@@ -10,7 +10,9 @@ const addToDb = (id: string) => {
         const newQuantity = quantity + 1;
         shoppingCart[id] = newQuantity;
     }
-    localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
+    if (typeof window !== "undefined") {
+        localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
+    }
 }
 
 const deleteFromDb = (id: string) => {
@@ -19,13 +21,15 @@ const deleteFromDb = (id: string) => {
 
     if (quantity) {
         const newQuantity = quantity - 1;
-        
+
         if (newQuantity <= 0) {
             delete shoppingCart[id];
         } else {
             shoppingCart[id] = newQuantity;
         }
-        localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
+        if (typeof window !== "undefined") {
+            localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
+        }
     }
 }
 
@@ -34,7 +38,9 @@ const removeFromDb = (id: string) => {
     const shoppingCart: any = getShoppingCart();
     if (id in shoppingCart) {
         delete shoppingCart[id];
-        localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
+        if (typeof window !== "undefined") {
+            localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
+        }
     }
 }
 
@@ -42,15 +48,19 @@ const getShoppingCart = () => {
     let shoppingCart = {};
 
     //get the shopping cart from local storage
-    const storedCart = localStorage.getItem('shopping-cart');
-    if (storedCart) {
-        shoppingCart = JSON.parse(storedCart);
+    if (typeof window !== "undefined") {
+        const storedCart = localStorage.getItem('shopping-cart');
+        if (storedCart) {
+            shoppingCart = JSON.parse(storedCart);
+        }
     }
     return shoppingCart;
 }
 
 const deleteShoppingCart = () => {
-    localStorage.removeItem('shopping-cart');
+    if (typeof window !== "undefined") {
+        localStorage.removeItem('shopping-cart');
+    }
 }
 
 export {

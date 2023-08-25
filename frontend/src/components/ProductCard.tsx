@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Button from "./Button";
 import { TProduct } from "@/types/types";
-import { addToDb, deleteFromDb, getShoppingCart } from "@/lib/cartFunctionality";
+import { addToDb, deleteFromDb } from "@/lib/cartFunctionality";
 import useProductsAndStoredProducts from "@/hooks/useProductAndStoredProducts";
 import { toast } from "react-hot-toast";
 
