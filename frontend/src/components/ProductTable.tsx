@@ -2,22 +2,18 @@
 
 import TableRow from './TableRow';
 import { TProductProps } from '@/types/types';
-import { RefObject, createRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Button from './Button';
 import AddProductForm from './AddProductForm';
 import { toast } from 'react-hot-toast';
 import Spinner from './Spinner';
-import Pdf from "react-to-pdf";
 
 const ProductTable = () => {
     const [products, setProducts] = useState<TProductProps[]>([]);
     const [loading, setLoading] = useState(true);
     // state for add modal
     const [addModalIsOpen, setAddModalIsOpen] = useState(false);
-
-    // ref for pdf export
-    const ref: RefObject<HTMLDivElement> = createRef();
 
     // table heading
     const tableHead = ["Product Image", "Product Name", "Product Weight", "Product Price", "Action"];
@@ -158,17 +154,12 @@ const ProductTable = () => {
                     <section className="grid gap-8">
                         {/* action buttons */}
                         <div className="flex items-center justify-between w-full">
+                            <Button
+                                className="cursor-pointer bg-white rounded-lg text-indigo-500 hover:text-neutral-50 flex hover:bg-indigo-500 transition items-center gap-1">
+                                <i className="ri-file-pdf-2-line"></i>
+                                <span>Export Pdf</span>
+                            </Button>
 
-                            <Pdf targetRef={ref} filename="product_table.pdf" x={.5} y={.5}>
-                                {({ toPdf }: { toPdf: () => void }) =>
-                                    <Button
-                                        onClick={toPdf}
-                                        className="cursor-pointer bg-white rounded-lg text-indigo-500 hover:text-neutral-50 flex hover:bg-indigo-500 transition items-center gap-1">
-                                        <i className="ri-file-pdf-2-line"></i>
-                                        <span>Export Pdf</span>
-                                    </Button>
-                                }
-                            </Pdf>
                             <Button
                                 onClick={() => setAddModalIsOpen(true)}
                                 className="cursor-pointer bg-indigo-500 rounded-lg text-neutral-50 flex items-center gap-1">
@@ -184,15 +175,7 @@ const ProductTable = () => {
                         </div>
 
                         {/* table */}
-                        <div className="overflow-hidden" ref={ref}>
-                            <div className="hidden print:block gap-2 py-6 text-indigo-500">
-                                <h1 className="text-center text-3xl font-bold">
-                                    All Product
-                                </h1>
-                                <p className='text-center text-sm'>
-                                    Prepared By: Md. Robiuzzaman Ruhan
-                                </p>
-                            </div>
+                        <div className="overflow-hidden">
                             <div className="overflow-auto h-full w-full">
                                 <table className="w-full min-w-max table-auto text-left">
                                     <thead>

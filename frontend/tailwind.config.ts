@@ -9,10 +9,6 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      screens: {
-        print: {raw: 'print'},
-        screen: {raw: 'screen'},
-      },
     },
   },
   plugins: [
