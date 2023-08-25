@@ -1,7 +1,6 @@
 "use client";
 
 import { TProductProps } from "@/types/types";
-import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import Container from "./Container";
 import Spinner from "./Spinner";
@@ -16,13 +15,11 @@ const ProductCarousel = () => {
     const [isSeeAll, setIsSeeAll] = useState(false);
 
     useEffect(() => {
-        axios.get("https://ruhan-mart-backend.vercel.app/api/products")
-            .then((res) => {
-                setProducts(res.data);
+        fetch("https://ruhan-mart-backend.vercel.app/api/products")
+            .then((res) => res.json())
+            .then((data) => {
+                setProducts(data);
                 setLoading(false);
-            })
-            .catch((error) => {
-                console.log(error.message);
             })
     }, [products])
 

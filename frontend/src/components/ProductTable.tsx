@@ -3,7 +3,6 @@
 import TableRow from './TableRow';
 import { TProductProps } from '@/types/types';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import Button from './Button';
 import AddProductForm from './AddProductForm';
 import { toast } from 'react-hot-toast';
@@ -20,13 +19,11 @@ const ProductTable = () => {
 
     // fetch all products
     useEffect(() => {
-        axios.get("https://ruhan-mart-backend.vercel.app/api/products")
-            .then((res) => {
-                setProducts(res.data);
+        fetch("https://ruhan-mart-backend.vercel.app/api/products")
+            .then((res) => res.json())
+            .then((data) => {
+                setProducts(data);
                 setLoading(false);
-            })
-            .catch((error) => {
-                console.log(error.message);
             })
     }, [products])
 
@@ -45,10 +42,17 @@ const ProductTable = () => {
 
         const url = `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMG_API_KEY}`;
 
-        axios.post(url, formData)
-            .then((res) => {
-                if (res.data) {
-                    const product_image = res.data.data.display_url;
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data) {
+                    const product_image = data.data.display_url;
                     console.log("image url: ", product_image);
 
                     const newProduct = {
@@ -58,17 +62,19 @@ const ProductTable = () => {
                         product_image
                     }
 
-                    console.log("newProduct", newProduct);
-
-
-                    // http req for add new product after img hosting
-                    axios.post("https://ruhan-mart-backend.vercel.app/api/products", newProduct)
-                        .then((res) => {
-                            console.log("data: ", res.data);
-                            if (res.data) {
+                    fetch("https://ruhan-mart-backend.vercel.app/api/products", {
+                        method: "POST",
+                        headers: {
+                            "content-type": "application/json"
+                        },
+                        body: JSON.stringify(newProduct)
+                    })
+                        .then((res) => res.json())
+                        .then((data) => {
+                            if (data) {
                                 form.reset();
                                 setAddModalIsOpen(false);
-                                setProducts((prevProducts) => [...prevProducts, res.data]);
+                                setProducts((prevProducts) => [...prevProducts, data]);
                                 return toast.success("Successfully Created New Product!");
                             }
                         })
@@ -86,9 +92,12 @@ const ProductTable = () => {
 
     // delete product functionality
     const handleDeleteProduct = (id: string) => {
-        axios.delete(`https://ruhan-mart-backend.vercel.app/api/products/${id}`)
-            .then((res) => {
-                if (res.data.deletedCount) {
+        fetch(`https://ruhan-mart-backend.vercel.app/api/products/${id}`, {
+            method: "DELETE",
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.deletedCount) {
                     const restProducts = products.filter((product) => product._id !== id)
                     setProducts(restProducts)
                     return toast.success("Successfully Deleted Product");
@@ -111,10 +120,17 @@ const ProductTable = () => {
 
         const url = `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMG_API_KEY}`;
 
-        axios.post(url, formData)
-            .then((res) => {
-                if (res.data) {
-                    const product_image = res.data.data.display_url;
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data) {
+                    const product_image = data.data.display_url;
                     console.log("image url: ", product_image);
 
                     const updatedProduct = {
@@ -127,10 +143,17 @@ const ProductTable = () => {
                     console.log("updatedProduct", updatedProduct);
 
                     // http req for updated new product after img hosting
-                    axios.put(`https://ruhan-mart-backend.vercel.app/api/products/${id}`, updatedProduct)
-                        .then((res) => {
-                            console.log("data: 131", res.data);
-                            if (res.data) {
+                    fetch(`https://ruhan-mart-backend.vercel.app/api/products/${id}`, {
+                        method: "PUT",
+                        headers: {
+                            "content-type": "application/json"
+                        },
+                        body: JSON.stringify(updatedProduct)
+                    })
+                        .then((res) => res.json())
+                        .then((data) => {
+                            console.log("data: 131", data);
+                            if (data) {
                                 form.reset();
                                 return toast.success("Successfully Updated this Product!");
                             }
@@ -210,5 +233,6 @@ const ProductTable = () => {
         </>
     );
 };
+
 
 export default ProductTable;

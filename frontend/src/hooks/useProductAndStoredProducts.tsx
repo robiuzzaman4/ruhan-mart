@@ -2,7 +2,6 @@
 
 import { getShoppingCart } from "@/lib/cartFunctionality";
 import { TStoredProductProps } from "@/types/types";
-import axios from "axios";
 import { useEffect, useState } from "react";
 
 
@@ -10,9 +9,10 @@ const useProductsAndStoredProducts = () => {
     const [allProducts, setAllProducts] = useState<TStoredProductProps[]>([]);
 
     useEffect(() => {
-        axios.get("https://ruhan-mart-backend.vercel.app/api/products")
-            .then((res) => {              
-                setAllProducts(res.data);
+        fetch("https://ruhan-mart-backend.vercel.app/api/products")
+        .then((res) => res.json())    
+        .then((data) => {              
+                setAllProducts(data);
             })
     }, []);
 

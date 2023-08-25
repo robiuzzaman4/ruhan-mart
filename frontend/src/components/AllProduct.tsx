@@ -2,7 +2,6 @@
 
 import Container from "./Container";
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { TProductProps } from "@/types/types";
 import Spinner from "./Spinner";
 import ProductCard from "./ProductCard";
@@ -12,13 +11,11 @@ const AllProduct = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get("https://ruhan-mart-backend.vercel.app/api/products")
-            .then((res) => {
-                setProducts(res.data);
+        fetch("https://ruhan-mart-backend.vercel.app/api/products")
+            .then((res) => res.json())
+            .then((data) => {
+                setProducts(data);
                 setLoading(false);
-            })
-            .catch((error) => {
-                console.log(error.message);
             })
     }, [products])
     return (

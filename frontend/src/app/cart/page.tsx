@@ -8,7 +8,6 @@ import { removeFromDb } from "@/lib/cartFunctionality";
 import { TStoredProductProps } from "@/types/types";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 const Cart = () => {
@@ -22,8 +21,6 @@ const Cart = () => {
         });
 
         router.refresh();
-        const restProducts = storedProducts.filter((product) => product._id !== id);
-        console.log(restProducts);
     }
 
     return (
